@@ -35,44 +35,6 @@ def split_string(source):
 				output[-1] = output[-1] + char
 	return output
 
-def SearchX(qes,option):
-
-
-    X1=0
-    X2=0
-    X3=0
-    words=split_string(qes)
-
-
-    driver.get("https://www.google.com/search?q="+qes+"\""+option[0]+"\"")
-    a=driver.find_elements_by_class_name('st')
-    ax=a[0].text+a[1].text+a[2].text
-    for word in words:
-        X1=X1+ax.count(word)
-    print(X1)
-
-    op2=split_string(option[1])
-
-
-    driver.get("https://www.google.com/search?q="+qes+"\""+option[1]+"\"")
-    b=driver.find_elements_by_class_name('st')
-    bx=b[0].text+b[1].text+b[2].text
-    for word in words:
-        X2=X2+bx.count(word)
-    print(X2)
-
-
-    op3=split_string(option[2])
-
-
-    driver.get("https://www.google.com/search?q="+qes+"\""+option[2]+"\"")
-    c=driver.find_elements_by_class_name('st')
-    cx=c[0].text+c[1].text+c[2].text
-    for word in words:
-        X3=X3+cx.count(word)
-    print(X3) 
-
-
 def OCR():
     question=""
     option=list()
@@ -149,66 +111,6 @@ def SearchNEG(qes,option):
 
     print("Hoàn thành trong : ",elapsed_time," giây.")
 
-
-def SearchEND(qes,optionX):
-
-    start_time = time.time()
-    print("----------------------------------------")
-
-    X1=0
-    X2=0
-    X3=0
-    driver.get("https://www.google.com/search?q="+qes)
-    a=driver.find_element_by_id('search')
-    ba=a.text.lower()
-    X1=ba.count(optionX[0].lower())
-    X2=ba.count(optionX[1].lower())
-    X3=ba.count(optionX[2].lower())
-
-    if ((X1>X2)&(X1>X3)):
-        print("[    Dap an: 11111   ]\n")
-    if ((X2>X1)&(X2>X3)):
-        print("[    Dap an: 22222   ]\n")
-    if ((X3>X1)&(X3>X2)):
-        print("[    Dap an: 33333   ]\n")
-    driver.get("https://www.google.com/search?q="+qes+"\""+optionX[0]+"\"")
-    a=driver.find_element_by_class_name('st')
-    b=driver.find_element_by_id('resultStats')
-    print(b.text)
-    x=re.sub('<em>\w+</em>',' ',a.get_attribute('innerHTML'))
-    x=re.sub('</em>.*?<em>',' ',x)
-    x=re.sub('</em>.*',' ',x)
-    x=re.sub('.*<em>',' ',x)
-    print(x)
-    driver.get("https://www.google.com/search?q="+qes+"\""+optionX[1]+"\"")
-    a=driver.find_element_by_class_name('st')
-    print("----------------------------------------")
-    x=re.sub('<em>\w+</em>',' ',a.get_attribute('innerHTML'))
-    x=re.sub('</em>.*?<em>',' ',x)
-    b=driver.find_element_by_id('resultStats')
-    print(b.text)
-    x=re.sub('</em>.*',' ',x)
-    x=re.sub('.*<em>',' ',x)
-    print(x)
-    driver.get("https://www.google.com/search?q="+qes+"\""+optionX[2]+"\"")
-    a=driver.find_element_by_class_name('st')
-    print("----------------------------------------")
-    b=driver.find_element_by_id('resultStats')
-    print(b.text)
-    x=re.sub('<em>\w+</em>',' ',a.get_attribute('innerHTML'))
-    x=re.sub('</em>.*?<em>',' ',x)
-    x=re.sub('</em>.*',' ',x)
-    x=re.sub('.*<em>',' ',x)
-    print(x)
-    
-
-    print(" ")  
-    print(" ")
-    print(" ")
-
-    elapsed_time = time.time() - start_time
-
-    print(elapsed_time)
 
 def SearchWG(qes,optionX):
 
