@@ -35,6 +35,7 @@ def split_string(source):
 				output[-1] = output[-1] + char
 	return output
 
+
 def OCR():
     question=""
     option=list()
@@ -55,9 +56,11 @@ def OCR():
     c = c.replace('º','o')
     c = c.replace('ï','i')
     c = c.replace("\n\n","\n")
+    c = c.replace(".J","J")
+    c = '\n'+c+'\n'
+    c = c.replace("\nd","\nJ")
 
-
-    i=0
+    i=1
     o1=""
     o2=""
     o3=""
@@ -71,7 +74,7 @@ def OCR():
         i=i+1
     i=i+1
 
-    while (i<len(c)):
+    while (i<len(c)-1):
         o3=o3+c[i]
         i=i+1
     i=i+1
@@ -83,7 +86,6 @@ def OCR():
 
 def SearchNEG(qes,option):
 
-    start_time = time.time()
 
     X1=0
     X2=0
@@ -93,23 +95,28 @@ def SearchNEG(qes,option):
     driver.get("https://www.google.com/search?q="+qes+"\""+option[0]+"\"")
     a=driver.find_element_by_id('resultStats')
     x=a.text
+    X1=int(''.join(filter(str.isdigit, x)))
     print("1. ", option[0],"\t", re.search('g (.+?) k',x).group(1))
 
     driver.get("https://www.google.com/search?q="+qes+"\""+option[1]+"\"")
     a=driver.find_element_by_id('resultStats')
     x=a.text
+    X2=int(''.join(filter(str.isdigit, x)))
     print("2. ", option[1],"\t", re.search('g (.+?) k',x).group(1))
     driver.get("https://www.google.com/search?q="+qes+"\""+option[2]+"\"")
     a=driver.find_element_by_id('resultStats')
     x=a.text
+    X3=int(''.join(filter(str.isdigit, x)))
     print("3. ", option[2],"\t", re.search('g (.+?) k',x).group(1))    
     print(" ")
+    if ((X1<X2)&(X1<X3)):
+        print(Back.RED+"[    Dap an: 11111   ]\n")
+    if ((X2<X1)&(X2<X3)):
+        print(Back.GREEN+"[    Dap an: 22222   ]\n")
+    if ((X3<X1)&(X3<X2)):
+        print(Back.BLUE+"[    Dap an: 33333   ]\n")
     print(" ")
-    elapsed_time = time.time() - start_time
 
-
-
-    print("Hoàn thành trong : ",elapsed_time," giây.")
 
 
 def SearchWG(qes,optionX):
@@ -176,6 +183,7 @@ def SearchWG(qes,optionX):
     f1=0
     f2=0
     f3=0
+    print()
     if ((X1>X2)&(X1>X3)):
         print(Back.CYAN+"[    Dap an: 11111   ]\n")
         f1=1
@@ -185,9 +193,9 @@ def SearchWG(qes,optionX):
     if ((X3>X1)&(X3>X2)):
         print(Back.CYAN+"[    Dap an: 33333   ]\n")
         f3=1
-    print(Back.CYAN*f1+"1. ",Back.CYAN*f1+optionX[0],"\t",W1+WD1/100,"\t",G1+GD1/100)
-    print(Back.CYAN*f2+"2. ",Back.CYAN*f2+optionX[1],"\t",W2+WD2/100,"\t",G2+GD2/100)
-    print(Back.CYAN*f3+"3. ",Back.CYAN*f3+optionX[2],"\t",W3+WD2/100,"\t",G3+GD3/100)
+    print(Back.MAGENTA*f1+"1. "+optionX[0],"\t",W1+WD1/100,"\t",G1+GD1/100)
+    print(Back.MAGENTA*f2+"2. "+optionX[1],"\t",W2+WD2/100,"\t",G2+GD2/100)
+    print(Back.MAGENTA*f3+"3. "+optionX[2],"\t",W3+WD2/100,"\t",G3+GD3/100)
 
 
 
